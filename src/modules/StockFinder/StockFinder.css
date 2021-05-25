@@ -1,0 +1,129 @@
+.stockfinder {
+  display: flex;
+  flex-direction: column;
+}
+.stockfinder__header {
+  height: 4.5rem;
+  background: #5b2c6f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 5;
+}
+.stockfinder__searchbox-container {
+  margin: auto 2rem;
+}
+.stockfinder__searchbox {
+  height: 2.5rem;
+  width: 30rem;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  padding: 2px 20px;
+  font-size: 1.2rem;
+}
+.stockfinder__locale-text {
+  color: #f2f2f2;
+  font-size: 1.2rem;
+}
+.stockfinder__body {
+  padding: 0rem 1.5rem;
+}
+.stockfinder__title_bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f2f2f2;
+  height: 3.8rem;
+  padding: 5px;
+}
+.stockfinder__title_bar-left {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.stockfinder__title_bar-lefttxt {
+  font-size: 2.2rem;
+  line-height: 2.2rem;
+  font-weight: 500;
+  color: #000;
+}
+.stockfinder__title_bar-right {
+  margin: auto 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.stockfinder__title_bar-righttxt {
+  font-size: 1.4rem;
+  font-weight: 500;
+  margin: auto 1rem;
+  color: #2874a6;
+}
+.stockfinder__menu_bar {
+  height: 3.5rem;
+  width: 100%;
+  background: #f2f2f2;
+}
+.stockfinder__menu-items {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  line-height: 3rem;
+  padding: 0.4rem;
+}
+.stockfinder__menu-items-text {
+  font-size: 1.3rem;
+  color: #2874a6;
+  height: 80%;
+  width: 12rem;
+  cursor: pointer;
+  text-align: center;
+  font-weight: 600;
+}
+.stockfinder__menu-active {
+  background: #fbfcfc;
+  color: #000;
+  text-decoration: underline;
+  font-size: 1.4rem;
+}
+.stockfinder__chart_container {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+.stockfinder__chart_container-graph {
+  flex: 8;
+}
+.stockfinder__chart_container-options {
+  flex: 2;
+}
+.stockfinder__chart-options-indicators {
+  height: fit-content;
+  background: #f8f8f8;
+  border-radius: 5px;
+  padding: 1rem;
+}
+.stockfinder__chart-indicators-heading {
+  text-align: center;
+}
+.stockfinder__chart-indicators-item {
+  font-size: 1.4rem;
+  margin-top: 5px;
+}
+.stockfinder__chart-options-companies {
+  height: fit-content;
+  background: #f8f8f8;
+  border-radius: 5px;
+  padding: 1rem;
+  margin-top: 2rem;
+}
+.stockfinder__chart-companies-heading {
+  text-align: center;
+}
+.stockfinder__chart-companies-listitem {
+  margin-top: 6px;
+  font-size: 1.4rem;
+  color: #de32ae;
+  font-weight: 550;
+}

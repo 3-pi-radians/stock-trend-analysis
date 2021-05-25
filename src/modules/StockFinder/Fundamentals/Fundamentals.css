@@ -1,0 +1,29 @@
+.fundamentals {
+}
+.fundamentals__menu {
+  height: 5rem;
+}
+.fundamentals__menu-items {
+  display: flex;
+  align-items: center;
+}
+.fundamentals__menu-items-text {
+  text-align: center;
+  font-size: 1.3rem;
+  margin: 1.5rem;
+  height: 2.5rem;
+  line-height: 2.5rem;
+  width: 12rem;
+  background: #f2f2f2;
+  cursor: pointer;
+  font-weight: 500;
+  border: 1px solid #79389c;
+  border-radius: 5px;
+  outline: none;
+  color: #2874a6;
+}
+.fundamentals__menu-active {
+  background: #79389c;
+  color: #fff;
+  font-weight: 550;
+}

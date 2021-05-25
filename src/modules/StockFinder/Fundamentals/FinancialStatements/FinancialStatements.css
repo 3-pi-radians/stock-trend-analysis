@@ -1,0 +1,61 @@
+.financialstatement {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 1.5rem;
+}
+.financialstatement__heading {
+  margin-bottom: 2rem;
+}
+.financialstatement__heading-text {
+  text-align: center;
+  color: #2874a6;
+  font-size: 2.8rem;
+}
+.financialstatement__reports {
+  padding: 1.5rem;
+  border-radius: 5px;
+  box-shadow: 0px 1px 7px 0px #c4c4c4;
+  margin-bottom: 2rem;
+}
+.financialstatement__reports-heading {
+  font-size: 2.4rem;
+  color: #5b2c6f;
+  margin: 1rem;
+}
+.financialstatement__reports-table {
+  display: flex;
+  align-items: center;
+}
+.financialstatement__reports-table-content {
+  flex: 50%;
+}
+#financialstatement-table1,
+#financialstatement-table2 {
+  border-collapse: collapse;
+  font-size: 1.3rem;
+  margin: 1rem 4rem;
+  width: 80%;
+  font-weight: 500;
+}
+#financialstatement-table1 th,
+#financialstatement-table2 th {
+  padding: 1rem 1rem;
+  background-color: #4caf50;
+  color: white;
+  border: 1px solid #ddd;
+}
+#financialstatement-table1 td,
+#financialstatement-table2 td {
+  border: 1px solid #ddd;
+  padding: 0.8rem;
+  color: #2874a6;
+}
+#financialstatement-table1 tr:nth-child(even),
+#financialstatement-table2 tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+#financialstatement-table1 tr:hover,
+#financialstatement-table1 tr:hover {
+  background-color: #ddd;
+}

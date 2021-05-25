@@ -1,0 +1,130 @@
+.overview {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 0rem 1.5rem;
+}
+.overview__heading {
+  margin-bottom: 1rem;
+}
+.overview__heading-text {
+  text-align: center;
+  color: #2874a6;
+  font-size: 2.8rem;
+}
+.overview__basic {
+  display: flex;
+  padding: 1.5rem;
+  border-radius: 5px;
+  box-shadow: 0px 1px 7px 0px #c4c4c4;
+  /* box-shadow: 0px 3px 6px #00000029; */
+  justify-content: space-between;
+}
+.overview__basic-left {
+  padding: 1rem;
+  width: 50%;
+}
+.overview__basic-left-name {
+  font-size: 2.4rem;
+  color: #5b2c6f;
+}
+.overview__basic-left-table {
+  display: flex;
+  align-items: center;
+}
+.overview__key-value-text {
+  margin: 0.8rem 0rem;
+  font-size: 1.3rem;
+}
+.overview__key-text {
+  font-weight: 500;
+  color: #339933;
+  margin: 0.4rem 0rem;
+}
+.overview__value-text {
+  color: #de32ae;
+  font-weight: 600;
+  margin: 0.4rem 2rem;
+}
+.overview__basic-left-desc {
+  font-size: 1.2rem;
+  text-align: justify;
+  color: #858585;
+}
+#overview__read {
+  cursor: pointer;
+  font-weight: 600;
+  color: #de32ae;
+  font-size: 1.3rem;
+}
+.overview__basic-right {
+  padding: 2rem;
+  width: 50%;
+}
+.overview__basic-right-table {
+  background: #f2f2f2;
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+}
+.overview__basic-right-table-content {
+  display: flex;
+  justify-content: space-between;
+}
+.overview__ratios {
+  padding: 1.5rem;
+  border-radius: 5px;
+  box-shadow: 0px 1px 7px 0px #c4c4c4;
+  margin-top: 2.5rem;
+}
+.overview__ratios-heading {
+  font-size: 2.4rem;
+  color: #5b2c6f;
+  margin: 1rem;
+}
+.overview__ratios-table {
+  display: flex;
+  align-items: center;
+}
+.overview__ratios-table-content {
+  flex: 50%;
+}
+#ratios-table {
+  border-collapse: collapse;
+  font-size: 1.3rem;
+  margin: 1rem 4rem;
+  width: 80%;
+  font-weight: 500;
+}
+#ratios-table td {
+  border: 1px solid #ddd;
+  padding: 0.8rem;
+  color: #2874a6;
+}
+#ratios-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+#ratios-table tr:hover {
+  background-color: #ddd;
+}
+.overview__misc {
+  padding: 1.5rem;
+  border-radius: 5px;
+  box-shadow: 0px 1px 7px 0px #c4c4c4;
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+.overview__misc-heading {
+  font-size: 2.4rem;
+  color: #5b2c6f;
+  margin: 1rem;
+}
+.overview__misc-table {
+  background: #f2f2f2;
+  display: flex;
+  align-items: center;
+  padding: 1.5rem;
+  width: 50%;
+  margin-top: 2rem;
+  margin-left: 4rem;
+}

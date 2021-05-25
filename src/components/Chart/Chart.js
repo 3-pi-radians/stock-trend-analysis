@@ -1,59 +1,90 @@
 import React, { useState, useEffect } from "react";
-import { Line } from "react-chartjs-2";
-import { csv } from "d3";
-import st from  "../../data/2019-2020.csv";
-
+import { Line, Bar } from "react-chartjs-2";
+import { count, csv, lab, line } from "d3";
+// import { ma, dma, ema, sma, wma } from 'moving-averages'
 import "./Chart.css";
+import movingAvg from "../../lib/moving-avg";
 
-function Chart() {
-  const [data, setData] = useState([]);
+const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+
+//API_KEY=5BJK4Y03JXIM6RRN
+const options= {
+  legend: {
+      display: false,
+  },
+//  maintainAspectRatio: false,
+  // plugins: {
+  //   tooltip: {enabled: false}
+  // },
+  //scales: { xAxes: [{ display: false, }], }
+};
+
+function Chart(props) {
+  console.log(props)
+  const [lineData, setLineData] = useState({});
 
   useEffect(() => {
-    csv(st).then(response => setData(response));
-  }, []);
+    setLineData({
+      labels: props.sessions,
+      datasets: [{
+          label: 'close',
+          data: props.close,
+          fill: true,
+          borderColor: "#742774",
+          pointRadius: 0.8
+      }]
+    });
+  }, [props.close]);
 
-  // const d = [12, 19, 3, 5, 23, 3,34, 44, 12, 33, 45, 67, 22 ,1, 23, 3, 44, 21];
-  // let bgColor = ['#89D65C']
-  // const getBackgroundColor = () => {
-  //   for (let i = 1; i < d.length; i++) {
-  //     if (d[i] < d[i-1]) {
-  //       bgColor.push('#FF7043');
-  //     } else {
-  //       bgColor.push('#89D65C');
-  //     }
-  //   }
-  //   return bgColor;
-  // }
+  const calculateMovingAverage = (indicator) => {
+    let avg = [];
 
-  const getGraphData = () => {
-    let close = [];
-    data.forEach(d => close.push(d.Close));
+    if (indicator === '20ma')
+      avg = movingAvg.get_simple_ma(20, props.close);
+    if (indicator === '20ema') 
+      avg = movingAvg.get_exponential_ma(20, props.close);
+    if (indicator === '50ema')
+      avg = movingAvg.get_exponential_ma(50, props.close);
 
-    return close;
+    return avg;
   }
 
-  const getLabels = () => {
-    let label = [];
-    data.forEach(d => label.push(d.Date));
-
-    return label;
-  }
-
-  const graphData = {
-    labels: getLabels(),
-    datasets: [{
-        label: 'close',
-        data: getGraphData(),
-        fill: true,
-        borderColor: "#742774"
-    }]
-  }
+  useEffect(() => {
+    let indicators = props.indicators;
+    if (indicators && indicators.length > 0) {
+      let indLen = indicators.length;
+      let dsets = lineData.datasets;
+      let avgsLen = dsets.length - 1;  // 1 element is the original graph data
+  
+      if (avgsLen < indLen) {  // last element has been added.
+        dsets.push({
+          label: indicators[indLen-1],
+          data: calculateMovingAverage(indicators[indLen-1]),
+          fill: false,
+          borderColor: "#B05022",
+          pointRadius: 0.65,
+          borderWidth: 0.6,
+        })
+      } else if (avgsLen > indLen) {  // last element has been removed.
+        dsets.pop();
+      }
+  
+      setLineData({
+        labels: props.sessions,
+        datasets: dsets
+      });
+    }
+  }, [props.indicators]);
 
   return (
     <div className = "chart">
-      <Line
-        data={graphData}
-     />
+      <div className = "chart__line">
+        <Line
+          data = {lineData}
+          options = {options}
+        />      
+      </div>
     </div>
   );
 };

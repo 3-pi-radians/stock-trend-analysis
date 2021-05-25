@@ -1,0 +1,25 @@
+#table-display {
+  border-collapse: collapse;
+  font-size: 1.3rem;
+  margin: 1rem 4rem;
+  width: 80%;
+  font-weight: 500;
+}
+#table-display th {
+  padding: 1rem 1rem;
+  text-align: left;
+  background-color: #4caf50;
+  color: white;
+  border: 1px solid #ddd;
+}
+#table-display td {
+  border: 1px solid #ddd;
+  padding: 0.8rem;
+  color: #2874a6;
+}
+#table-display tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+#table-display tr:hover {
+  background-color: #ddd;
+}
