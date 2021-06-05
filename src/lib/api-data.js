@@ -20,9 +20,16 @@ const getTiemSeries = (timeOption) => {
 
   return timeseries;
 };
-
+const getBaseURL = () => {
+  let rand = Date.now();
+  if (rand%10 < 5) {
+    return `${process.env.REACT_APP_API_BASE_URL_1}`;
+  } else {
+    return `${process.env.REACT_APP_API_BASE_URL_2}`;
+  }
+}
 const createApiUrl = (params) => {
-  let url=`${process.env.REACT_APP_API_BASE_URL}`;
+  let url= `${process.env.REACT_APP_API_BASE_URL_1}`;
 
   switch (params.category) {
 
@@ -63,9 +70,7 @@ const getApiData = async (params) => {
     let response = await axios.get(url);
     let result = response.data;
     console.log(result);
-    if (result.Note) {
-      throw new Error(result.Note);
-    }
+    if (result.Note)  throw new Error(result.Note);
 
     return result;
   } catch (error) {

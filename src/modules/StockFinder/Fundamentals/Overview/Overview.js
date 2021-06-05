@@ -5,7 +5,7 @@ function Overview({stock}) {
   const [readLength, setReadLength] = useState(400);
 
   const getDescription = (desc) => {
-    return (desc?.length > readLength ? desc.substr(0, readLength - 1) + "...." : desc + "   ");
+    return (desc?.length > readLength ? desc.substr(0, readLength - 1) + "....." : desc);
   }
 
   const applyReadFunction = () => {

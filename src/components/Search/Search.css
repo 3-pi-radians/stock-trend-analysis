@@ -1,0 +1,35 @@
+.search {
+  position: relative;
+}
+.search > input {
+  height: 3rem;
+  width: 30rem;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  padding: 2px 20px;
+  font-size: 1.2rem;
+}
+.search__list {
+  background: #fff;
+  position: absolute;
+  top: 4rem;
+}
+.search__list-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px 20px;
+  height: 2.8rem;
+  width: 30rem;
+  border: 1px solid #ddd;
+  cursor: pointer;
+}
+.search__list-row:hover {
+  background: #f2f2f2;
+}
+.search__listitem {
+  font-size: 1.2rem;
+  color: #1e88e5;
+  font-weight: bold;
+}

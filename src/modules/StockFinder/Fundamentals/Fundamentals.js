@@ -47,13 +47,13 @@ function Fundamentals({equity}) {
 
   return (
     <div className = "fundamentals">
-      <div className = "fundamentals__menu">
-        <div className = "fundamentals__menu-items">
+      <div className = "app__menu-bar">
+        <div className = "app__menu-bar-items">
           {
             FUNDAMENTALS.map((fun, idx) => <p 
               key = {idx} 
               onClick = {() => setFundamental(fun)}
-              className = {`fundamentals__menu-items-text ${fun.displayText === fundamental.displayText ? "fundamentals__menu-active" : ""}`}
+              className = {`app__menu-bar-items-text ${fun.displayText === fundamental.displayText ? "app__menu-bar-items-active" : ""}`}
               >
               {fun.displayText}
             </p>)

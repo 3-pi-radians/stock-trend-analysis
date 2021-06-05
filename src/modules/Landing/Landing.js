@@ -25,13 +25,13 @@ const cardData = [
     title: "Forex",
     tagline: "",
     description: "Know about foren exchange rates",
-    path: "/foreign-exchange"
+    path: "/crypto-forex"
   },
   {
     title: "General Market Trend",
     tagline: "THINK LONG TERM",
     description: "know about general market trend.",
-    path: "/crypto"
+    path: "/crypto-forex"
   }
 ];
 

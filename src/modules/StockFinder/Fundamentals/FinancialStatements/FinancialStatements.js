@@ -89,13 +89,11 @@ function FinancialStatements({ stock, fundamental }) {
     let newCell = newRow.insertCell(0);
     newCell.appendChild(txt);
 
-    for (let i = 0; i < durationArr?.length; i++) {
-      if (i < numOfColumns) {
-        newCell = newRow.insertCell(i + 1);
-        let element = durationArr[i];
-        txt = document.createTextNode(`${element[key]}`);
-        newCell.appendChild(txt);
-      } else break;
+    for (let i = 0; i < durationArr?.length && i < numOfColumns; i++) {
+      let element = durationArr[i];
+      newCell = newRow.insertCell(i + 1);
+      txt = document.createTextNode(`${element[key]}`);
+      newCell.appendChild(txt);
     }
   }
 

@@ -4,3 +4,30 @@
 /* body {
   font-size: 10px;
 } */
+.app__menu-bar {
+  height: 5rem;
+}
+.app__menu-bar-items {
+  display: flex;
+  align-items: center;
+}
+.app__menu-bar-items-text {
+  text-align: center;
+  font-size: 1.3rem;
+  margin: 1.5rem;
+  height: 2.5rem;
+  line-height: 2.5rem;
+  width: 12rem;
+  background: #f2f2f2;
+  cursor: pointer;
+  font-weight: 500;
+  border: 1px solid #79389c;
+  border-radius: 5px;
+  outline: none;
+  color: #2874a6;
+}
+.app__menu-bar-items-active {
+  background: #79389c;
+  color: #fff;
+  font-weight: 550;
+}

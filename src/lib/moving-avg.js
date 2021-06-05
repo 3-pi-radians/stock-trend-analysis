@@ -16,7 +16,7 @@ class MovingAverages {
     return result;
   }
   // exponential moving average
-  get_exponential_ma(days, data) { 
+  get_exponential_ma(days, data) {
     const sFactor = 2/(days + 1);
     let result = [];
     let sum = 0;

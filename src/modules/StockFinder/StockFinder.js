@@ -1,90 +1,76 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 
-import Card from '../../components/Card/Card';
-import Chart from '../../components/Chart/Chart';
-import Volume from '../../components/Volume/Volume';
-import './StockFinder.css';
-
-import lib from '../../lib';
+import Search from '../../components/Search/Search';
 import TimeSeries from './TimeSeries/TimeSeries';
 import Fundamentals from './Fundamentals/Fundamentals';
+import './StockFinder.css';
 
-const adr = lib.symbols.adr;
-const apiData = lib.apiData;
+import symbols from '../../lib/symbols';
 
-const PERIODS = ["Daily", "Weekly", "Monthly"];
+const indianEquity = symbols.indianEquity;
+const usEquity = symbols.usEquity;
+const scrips = [...usEquity, ...indianEquity];
+
 const Menu = ["Time Series", "Fundamentals"];
 const region = ["US", "IN"];
 
 function StockFinder() {
   const [locale, setLocale] = useState(region[0]);
-  const [data, setData] = useState({});
   const [feature, setFeature] = useState(Menu[0]);
-  const [duration, setDuration] = useState(PERIODS[1]);
-  const [equity , setEquity] = useState(adr[0]);
-  const [sessions, setSessions] = useState([]);
-  const [close, setClose] = useState([]);
-  const [volume, setVolume] = useState([]);
-  const [indicators, setIndicators] = useState([]);
+  const [equity , setEquity] = useState(usEquity[18]);
+  const [stats, setStats] = useState(null);
+  const [peers, setPeers] = useState([]);
+  const history = useHistory();
+  const [searchStocks, setSearchStocks] = useState([]);
 
   useEffect(() => {
-    const getApiData = async () => {
+    setPeers(scrips.filter(scrp => scrp.industryCode === equity.industryCode && scrp.symbol !== equity.symbol));
+  }, [equity]);
 
-      let params = {
-        timeOption: {
-          period: `${duration.toUpperCase()}`,
-        },
-        locale: locale,
-        category: "TIME_SERIES",
-        symbol: `${equity.symbol}`
-      };
+  const getRequiredStats = (data) => {
+    setStats({
+      prevClose: data.prevClose,
+      preVolume: data.preVolume,
+      closeChange: (data.closeChange[0] - data.closeChange[1])/data.closeChange[1]
+    });
+  }
 
-      let result = await apiData(params);
-      if (!(result instanceof Error)) {      
-        let key = Object.keys(result)[1];
-        setData(result[key]);
-      }
+  const formatNumber = (amount, type) => {
+    switch (type) {
+      case "currency": return new Intl.NumberFormat('en-US', { style: type, currency: equity.currency }).format(amount);
+
+      case "decimal": return new Intl.NumberFormat('en-US', {style: type}).format(amount);
     }
+  }
 
-    getApiData();
-
-  }, [duration]);
-
-  useEffect(() => {
-    let close = [];
-    let volume = [];
-    let date = [];
-
-    let keys = Object.keys(data);
-    let l = keys.length;
-
-    for (let idx = 0; idx < l; idx++) {
-      date[l-idx-1] = keys[idx];
-      let value = data[keys[idx]];
-
-      close[l-idx-1] = parseFloat(value["4. close"]);
-      volume[l-idx-1] = parseFloat(value["5. volume"]);
-    }
-
-    setSessions(date);
-    setVolume(volume);
-    setClose(close);
-
-  }, [data]);
-
-  const selectIndicators = (e) => {
-    if (e.target.checked) {
-      setIndicators(ind => [...ind, e.target.value]);
+  const filterSearchText = (text) => {
+    if (text !== "") {
+      setSearchStocks(scrips.filter(scrp => scrp.name.toLowerCase().includes(text.toLowerCase()) || 
+      scrp.symbol.toLowerCase().includes(text.toLowerCase())));
     } else {
-      setIndicators(indicators.filter(ind => ind !== e.target.value));
+      setSearchStocks([]);
     }
+  }
+
+  const changeCurrentAsset = (asset) => {
+    setStats(null);
+    setEquity(asset);
+    setLocale(asset.locale);
   }
 
   return (
     <div className = "stockfinder">
       <div className = "stockfinder__header">
+        <div className = "stockfinder__header-icon" onClick = {() => history.push("/")}>
+          <KeyboardBackspaceIcon />
+        </div>
         <div className = "stockfinder__searchbox-container">
-          <input className = "stockfinder__searchbox" type = "text" placeholder = "Stock Name or Code"/>
+          <Search filterSearchText = {filterSearchText} 
+            placeholder = "Stock Name or Symbol" 
+            filteredAssets = {searchStocks}
+            changeCurrentAsset = {changeCurrentAsset}/>
         </div>
         <div className = "stockfinder__locale">
           <p className = "stockfinder__locale-text">Locale: {locale}</p>
@@ -95,98 +81,65 @@ function StockFinder() {
           <div className = "stockfinder__title_bar-left">
           <p className = "stockfinder__title_bar-lefttxt">{equity.name}</p>
           <p className = "stockfinder__title_bar-lefttxt">: {equity.symbol}</p>
+          {
+            stats ?
+            <>
+              <p className = "stockfinder__title_bar-lefttxt stockfinder__title_bar-leftclose">&nbsp; {formatNumber(stats.prevClose, "currency")}</p>
+              <p className = {`stockfinder__title_bar-lefttxt 
+                ${stats?.closeChange > 0 ? `stockfinder__positive_close` : `stockfinder__negative_close` }`}>
+                 ({formatNumber(100 * stats.closeChange, "decimal") }%)
+              </p>
+            </>
+            : null
+          }
           </div>
             {
-              close.length ?
+              stats ?
               <div className = "stockfinder__title_bar-right">
                 <p className = "stockfinder__title_bar-righttxt">Industry:  {equity.industry}</p>
-                <p className = "stockfinder__title_bar-righttxt">Prev Close: {close[close.length -1]}</p>
-                <p className = "stockfinder__title_bar-righttxt">Volume: {volume[volume.length-1]}</p>
-                <p  className = "stockfinder__title_bar-righttxt">
-                   % Chg: {100*(close[close.length -1]-close[close.length -2])/close[close.length -1]}
-                </p>
+                <p className = "stockfinder__title_bar-righttxt">Volume: {stats.preVolume}</p>
               </div>
-              :
-              <div></div>
+              : null
             }
         </div>
         <div className = "stockfinder__menu_bar">
           <div className = "stockfinder__menu-items">
-            {
-              Menu.map((menu, idx) => <p key = {idx} 
-                className = {`stockfinder__menu-items-text ${menu === feature ? "stockfinder__menu-active": ""}`}
-                onClick = {() => setFeature(menu)}> 
-                  {menu}
-                </p>)
-            }
+            <p  className = {`stockfinder__menu-items-text ${Menu[0] === feature ? "stockfinder__menu-active": ""}`}
+              onClick = {() => setFeature(Menu[0])}>
+               {Menu[0]}
+            </p>
+            <p  className = {`stockfinder__menu-items-text ${Menu[1] === feature ? "stockfinder__menu-active": ""}`}
+              onClick = {() => setFeature(Menu[1])}>
+               {locale === region[0] && Menu[1]}
+            </p>
           </div>
         </div>
         {
-          feature === Menu[0] && <TimeSeries equity = {equity} />
+          feature === Menu[0] && <TimeSeries equity = {equity} locale = {locale} getRequiredStats = {getRequiredStats}/>
         }
         {
           feature === Menu[1] && locale === region[0] && <Fundamentals equity = {equity}/>
         }
-        {/* {
-          feature === Menu[2] && locale === region[0] && <Technical />
-        } */}
-        {/* {
-          close.length ?
-          <div className = "stockfinder__chart_container">
-            <div className = "stockfinder__chart_container-graph">
-              <div className = "stockfinder__chart_container-chart">
-                <Chart 
-                  close = {close}
-                  sessions = {sessions}
-                  indicators = {indicators}
-                />
-              </div>
-              <div className = "stockfinder__chart_container-volume">
-              <Volume
-                close = {close}
-                sessions = {sessions}
-                volume = {volume}
-              />
-              </div>
-            </div>
-            <div className = "stockfinder__chart_container-options">
-              <div className = "stockfinder__chart-options-indicators">
-                <h2 className = "stockfinder__chart-indicators-heading">Indicators</h2>
-                <div className = "stockfinder__chart-indicators-item">
-                    <input type="checkbox"  value="20ma" onClick = {selectIndicators}/>
-                    <label for="20ma"> 20 days moving average</label><br />
-                </div>
-                <div className = "stockfinder__chart-indicators-item">
-                  <input type="checkbox" value="20ema" onClick = {selectIndicators}/>
-                  <label for="20ema"> 20 days exponential moving average</label><br />
-                </div>
-
-                <div className = "stockfinder__chart-indicators-item">
-                  <input type="checkbox" value="50ema" onClick = {selectIndicators}/>
-                  <label for="50ema"> 50 days exponential moving average</label><br />
-                </div>               
-              </div>
-              <div className = "stockfinder__chart-options-companies">
-                <h3 className = "stockfinder__chart-companies-heading">
-                  Select from list here
-                </h3>
-                <div className = "stockfinder__chart-companies-list">
-                {
-                  symbols.map((sym,idx) => {
-                    return (
-                      <div key = {idx} className = "stockfinder__chart-companies-listitem">
-                        {sym.name}: {sym.symbol}
-                      </div>
-                    )
-                  })
-                }
-                </div>
-              </div>
-            </div>
-          </div>
-          :
-          <div className = "stockfinder__loading"></div>
-        } */}
+        {
+          feature === Menu[0] ? 
+          <div className = "stockfinder__peers">
+            <h3 className = "stockfinder__peers-heading">
+              Related Stocks
+            </h3>
+            {
+              peers?.map((prs, idx) => {
+                return (
+                  <div key = {idx} className = "stockfinder__peers-row" onClick = {() => changeCurrentAsset(prs)}>
+                    <p className = "stockfinder__peers-rowtext">{prs.name}</p>
+                    <p className = "stockfinder__peers-rowtext">{prs.symbol}</p>
+                    <p className = "stockfinder__peers-rowtext">{prs.exchange}</p>
+                    <p className = "stockfinder__peers-rowtext">{prs.industry}</p>
+                  </div>
+                )
+              })
+            }
+          </div> : null
+        }
       </div>
     </div>
   )
