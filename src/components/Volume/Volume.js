@@ -8,7 +8,18 @@ function Volume ({sessions, volume, close}) {
     legend: { 
       display: false,
     },
-    maintainAspectRatio: false
+    maintainAspectRatio: false,
+    scales: {
+      yAxes: [
+        {
+          ticks: {
+            callback: function(label, index, labels) {
+              return label/1000000+'M';
+            }
+          }
+        }
+      ]
+  }
   };
 
   useEffect(() => {

@@ -6,6 +6,9 @@
 .timeseries__chart_container {
   flex: 0.8;
 }
+.timeseries__loader {
+  flex: 0.8;
+}
 .timeseries__chart_container-chart {
   width: 100%;
 }
@@ -171,8 +174,7 @@
   padding: 1rem;
 }
 .timeseries__datapoints-range > label {
-  text-align: center;
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   font-weight: 500;
 }
 .timeseries__datapoints-range > input {

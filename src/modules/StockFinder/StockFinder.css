@@ -2,30 +2,6 @@
   display: flex;
   flex-direction: column;
 }
-.stockfinder__header {
-  height: 4.5rem;
-  background: #5b2c6f;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  opacity: 5;
-  box-sizing: border-box;
-  padding: 1rem 3rem;
-}
-.stockfinder__header-icon {
-  height: 3.2rem;
-  width: 8rem;
-  border-radius: 5px;
-  outline: none;
-  background: #7b7d7d;
-  text-align: center;
-  cursor: pointer;
-}
-.stockfinder__header-icon > .MuiSvgIcon-root {
-  color: #fff;
-  font-size: 3rem;
-}
-
 .stockfinder__locale-text {
   color: #f2f2f2;
   font-size: 1.2rem;

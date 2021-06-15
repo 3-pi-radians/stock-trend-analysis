@@ -7,7 +7,6 @@
 import axios from 'axios';
 import {
   TIME_SERIES,
-  TECH_INDICATOR,
   FUNDAMENTAL_DATA,
   CRYPTO
 } from './base';
@@ -55,11 +54,9 @@ const createApiUrl = (params) => {
       return url;
     };
 
-    case TECH_INDICATOR: {
-      break;
-    } 
     case CRYPTO: {
-      break;
+      url += `function=${params.requestFunction}&symbol=${params.symbol}&market=${params.market}`;
+      return url;
     }
   }
 };

@@ -22,16 +22,16 @@ const cardData = [
     path: "/general-market-trend"
   },
   {
-    title: "Forex",
-    tagline: "",
-    description: "Know about foren exchange rates",
+    title: "Crypto currencies",
+    tagline: "ERA OF DIGITAL CURRENCY",
+    description: "crypto exchange rates",
     path: "/crypto-forex"
   },
   {
-    title: "General Market Trend",
-    tagline: "THINK LONG TERM",
+    title: "Analysis",
+    tagline: "Mathematical Analysis",
     description: "know about general market trend.",
-    path: "/crypto-forex"
+    path: "/analysis"
   }
 ];
 

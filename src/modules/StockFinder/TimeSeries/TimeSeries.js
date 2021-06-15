@@ -4,6 +4,7 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import CloseIcon from '@material-ui/icons/Close';
 import Chart from '../../../components/Chart/Chart';
 import Volume from '../../../components/Volume/Volume'
+import Loader from '../../../components/Loader/Loader';
 import "./TimeSeries.css";
 import fetchMarketData from '../../../lib/api-data';
 
@@ -48,7 +49,7 @@ function TimeSeries({equity, locale, getRequiredStats}) {
   }, [duration, equity]);
 
   useEffect(() => {
-    if (data !== undefined && data !== null) {
+    if (data && Object.entries(data).length) {
       let close = [];
       let volume = [];
       let date = [];
@@ -74,12 +75,13 @@ function TimeSeries({equity, locale, getRequiredStats}) {
         setVolume(volume);
         setClose(close);
       }
-      // return function cleanup() {
-      //   setClose([]);
-      //   setVolume([]);
-      //   setSessions([]);
-      //   setDataPoints(70)
-      // }
+    }
+
+
+    return function cleanup() {
+      setSessions([]);
+      setVolume([]);
+      setClose([]);
     }
   }, [dataPoints, data]);
 
@@ -148,125 +150,129 @@ function TimeSeries({equity, locale, getRequiredStats}) {
           }
         </div>
       </div>
-        
-          <div className = "timeseries__body">
-            <div className = "timeseries__chart_container">
-              <div className = "timeseries__chart_container-chart">
-                <Chart 
-                  close = {close}
-                  sessions = {sessions}
-                  indicators = {indicators}
-                />
-              </div>
-              <div className = "timeseries__chart_container-volume">
+      <div className = "timeseries__body">
+        {
+          close?.length > 0?
+          <div className = "timeseries__chart_container">
+            <div className = "timeseries__chart_container-chart">
+              <Chart 
+                close = {close}
+                sessions = {sessions}
+                indicators = {indicators}
+              />
+            </div>
+            <div className = "timeseries__chart_container-volume">
               <Volume
                 close = {close}
                 sessions = {sessions}
                 volume = {volume}
               />
+            </div>
+          </div> 
+        :
+        <div className = "timeseries__loader">
+          <Loader />
+        </div>
+        }
+        <div className = "timeseies__chart_options">
+          <div className = "timeseries__chart-indicators">
+            <h3 className = "timeseries__chart-indicators-heading">
+              Technical Indicators
+            </h3>
+            <div className = "timeseries__indicators-list">
+              <div className = "timeseries__indicators-list-item">
+              <div className = "timeseries__indicators-list-itemrow">
+                <div className = "timeseries__indicators-list-itemname">
+                  Simple Moving Average
+                </div>
+                <div  className = "timeseries__indicators-list-itemicon" id = "indicator-sma-addicon" 
+                  onClick = {(e) => toggleIndicatorDropdown("indicator-sma-addicon", "indicator-sma")}>
+                  <AddCircleIcon />
+                </div>
+                </div>
+                <div id = "indicator-sma" className = "timeseries__indicators-dropdown">
+                  <label>Length</label>
+                  <input type = "number" min = "1" defaultValue = "10"/><br />
+                  <label>colour</label>
+                  <input type = "color" />
+                  <div className = "timeseries__indicators-dropdown-btns">
+                    <button className = "timeseries__indicators-dropdown-btncancel"
+                      onClick = {(e) => performIndicatorBtnFunction(e, "indicator-sma-addicon", "indicator-sma")}>
+                        cancel
+                    </button>
+                    <button className = "timeseries__indicators-dropdown-btnsave" 
+                      onClick = {(e) => performIndicatorBtnFunction(e, "indicator-sma-addicon", "indicator-sma")}>
+                        save
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div className = "timeseries__indicators-list-item">
+              <div className = "timeseries__indicators-list-itemrow">
+                <div className = "timeseries__indicators-list-itemname">
+                  Exponential Moving Average
+                </div>
+                <div  className = "timeseries__indicators-list-itemicon" id = "indicator-ema-addicon" 
+                onClick = {(e) => toggleIndicatorDropdown("indicator-ema-addicon" , "indicator-ema")}>
+                  <AddCircleIcon />
+                </div>
+                </div>
+                <div id = "indicator-ema" className = "timeseries__indicators-dropdown">
+                  <label>Length</label>
+                  <input type = "number" min = "1" defaultValue = "10" /><br />
+                  <label>colour</label>
+                  <input type = "color" />
+                  <div className = "timeseries__indicators-dropdown-btns">
+                    <button className = "timeseries__indicators-dropdown-btncancel"
+                      onClick = {(e) => performIndicatorBtnFunction(e, "indicator-ema-addicon", "indicator-ema")}>
+                        cancel
+                    </button>
+                    <button className = "timeseries__indicators-dropdown-btnsave" 
+                      onClick = {(e) => performIndicatorBtnFunction(e, "indicator-ema-addicon", "indicator-ema")}>
+                        save
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
-            <div className = "timeseies__chart_options">
-              <div className = "timeseries__chart-indicators">
-                <h3 className = "timeseries__chart-indicators-heading">
-                  Technical Indicators
-                </h3>
-                <div className = "timeseries__indicators-list">
-                  <div className = "timeseries__indicators-list-item">
-                  <div className = "timeseries__indicators-list-itemrow">
-                    <div className = "timeseries__indicators-list-itemname">
-                      Simple Moving Average
-                    </div>
-                    <div  className = "timeseries__indicators-list-itemicon" id = "indicator-sma-addicon" 
-                      onClick = {(e) => toggleIndicatorDropdown("indicator-sma-addicon", "indicator-sma")}>
-                      <AddCircleIcon />
-                    </div>
-                    </div>
-                    <div id = "indicator-sma" className = "timeseries__indicators-dropdown">
-                      <label>Length</label>
-                      <input type = "number" min = "1" defaultValue = "10"/><br />
-                      <label>colour</label>
-                      <input type = "color" />
-                      <div className = "timeseries__indicators-dropdown-btns">
-                        <button className = "timeseries__indicators-dropdown-btncancel"
-                          onClick = {(e) => performIndicatorBtnFunction(e, "indicator-sma-addicon", "indicator-sma")}>
-                            cancel
-                        </button>
-                        <button className = "timeseries__indicators-dropdown-btnsave" 
-                          onClick = {(e) => performIndicatorBtnFunction(e, "indicator-sma-addicon", "indicator-sma")}>
-                            save
-                        </button>
-                      </div>
-                    </div>
+            <hr />
+            <div className = "timeseries__datapoints-range">
+              <label>Number of DataPoints: {dataPoints}</label><br />
+              <input type = "range"
+                min = "50"
+                max = {getSliderMax()}
+                value = {dataPoints}
+                onChange = {e => setDataPoints(e.target.value)}
+                step = "10"
+              />
+            </div>
+            <div className = "timeseries__applied-indicators">
+              {
+                indicators.length ?
+                <>
+                  <h3 className = "timeseries__applied-indicators-heading">Indicators Applied</h3>
+                  <div className = "timeseries__applied-indicators-list">
+                    {
+                      indicators.map((ind, idx) => {
+                        return (
+                          <div key = {idx} className = "timeseries__applied-indicators-listitem">
+                            <div className = "timeseries__applied-indicators-itemtext">{ind.text} {ind.period}</div>
+                            <div className = "timeseries__applied-indicators-itemcolor" style={{backgroundColor: `${ind.color}`}}></div>
+                            <div className = "timeseries__applied-indicators-itemicon"><SettingsIcon /></div>
+                            <div className = "timeseries__applied-indicators-itemicon" 
+                              onClick = {() => clearIndicatorItem(`${ind.text}-${ind.period}`)}><CloseIcon /></div>
+                          </div>
+                        );
+                      })
+                    }
                   </div>
-                  <div className = "timeseries__indicators-list-item">
-                  <div className = "timeseries__indicators-list-itemrow">
-                    <div className = "timeseries__indicators-list-itemname">
-                      Exponential Moving Average
-                    </div>
-                    <div  className = "timeseries__indicators-list-itemicon" id = "indicator-ema-addicon" 
-                    onClick = {(e) => toggleIndicatorDropdown("indicator-ema-addicon" , "indicator-ema")}>
-                      <AddCircleIcon />
-                    </div>
-                    </div>
-                    <div id = "indicator-ema" className = "timeseries__indicators-dropdown">
-                      <label>Length</label>
-                      <input type = "number" min = "1" defaultValue = "10" /><br />
-                      <label>colour</label>
-                      <input type = "color" />
-                      <div className = "timeseries__indicators-dropdown-btns">
-                        <button className = "timeseries__indicators-dropdown-btncancel"
-                          onClick = {(e) => performIndicatorBtnFunction(e, "indicator-ema-addicon", "indicator-ema")}>
-                            cancel
-                        </button>
-                        <button className = "timeseries__indicators-dropdown-btnsave" 
-                          onClick = {(e) => performIndicatorBtnFunction(e, "indicator-ema-addicon", "indicator-ema")}>
-                            save
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <hr />
-                <div className = "timeseries__datapoints-range">
-                  <label>Number of DataPoints: {dataPoints}</label><br />
-                  <input type = "range"
-                    min = "50"
-                    max = {getSliderMax()}
-                    value = {dataPoints}
-                    onChange = {e => setDataPoints(e.target.value)}
-                    step = "10"
-                  />
-                </div>
-                <div className = "timeseries__applied-indicators">
-                  {
-                    indicators.length ?
-                    <>
-                      <h3 className = "timeseries__applied-indicators-heading">Indicators Applied</h3>
-                      <div className = "timeseries__applied-indicators-list">
-                        {
-                          indicators.map((ind, idx) => {
-                            return (
-                              <div key = {idx} className = "timeseries__applied-indicators-listitem">
-                                <div className = "timeseries__applied-indicators-itemtext">{ind.text} {ind.period}</div>
-                                <div className = "timeseries__applied-indicators-itemcolor" style={{backgroundColor: `${ind.color}`}}></div>
-                                <div className = "timeseries__applied-indicators-itemicon"><SettingsIcon /></div>
-                                <div className = "timeseries__applied-indicators-itemicon" 
-                                  onClick = {() => clearIndicatorItem(`${ind.text}-${ind.period}`)}><CloseIcon /></div>
-                              </div>
-                            );
-                          })
-                        }
-                      </div>
-                    </>
-                    : null
-                  }
-                </div>
-              </div>
+                </>
+                : null
+              }
             </div>
           </div>
-          :
-          <div className = "stockfinder__loading"></div>
+        </div>
+      </div>
     </div>
   );
 }

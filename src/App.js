@@ -8,7 +8,8 @@ import {
 import Landing from './modules/Landing/Landing';
 import StockFinder from './modules/StockFinder/StockFinder';
 import MarketTrend from './modules/MarketTrend/MarketTrend';
-import CryptoForex from './modules/CryptoForex/CryptoForex';
+import Crypto from './modules/Crypto/Crypto';
+import Loader from "./components/Loader/Loader";
 import './App.css';
 
 function App() {
@@ -26,7 +27,10 @@ function App() {
             <MarketTrend />
           </Route>
           <Route path = "/crypto-forex">
-            <CryptoForex />
+            <Crypto />
+          </Route>
+          <Route path = "/loader">
+            <Loader />
           </Route>
         </Switch>
       </Router>      

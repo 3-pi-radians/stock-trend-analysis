@@ -22,8 +22,8 @@ function StockFinder() {
   const [equity , setEquity] = useState(usEquity[18]);
   const [stats, setStats] = useState(null);
   const [peers, setPeers] = useState([]);
-  const history = useHistory();
   const [searchStocks, setSearchStocks] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     setPeers(scrips.filter(scrp => scrp.industryCode === equity.industryCode && scrp.symbol !== equity.symbol));
@@ -42,6 +42,8 @@ function StockFinder() {
       case "currency": return new Intl.NumberFormat('en-US', { style: type, currency: equity.currency }).format(amount);
 
       case "decimal": return new Intl.NumberFormat('en-US', {style: type}).format(amount);
+
+      default: return new Intl.NumberFormat('en-US', {style: "decimal"}).format(amount);
     }
   }
 
@@ -62,11 +64,11 @@ function StockFinder() {
 
   return (
     <div className = "stockfinder">
-      <div className = "stockfinder__header">
-        <div className = "stockfinder__header-icon" onClick = {() => history.push("/")}>
+      <div className = "app__header">
+        <div className = "app__header-icon" onClick = {() => history.push("/")}>
           <KeyboardBackspaceIcon />
         </div>
-        <div className = "stockfinder__searchbox-container">
+        <div className = "app__searchbox-container">
           <Search filterSearchText = {filterSearchText} 
             placeholder = "Stock Name or Symbol" 
             filteredAssets = {searchStocks}

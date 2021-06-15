@@ -27,3 +27,6 @@
   color: #fff;
   font-weight: 550;
 }
+.fundamentals__loader {
+  height: 100vh;
+}

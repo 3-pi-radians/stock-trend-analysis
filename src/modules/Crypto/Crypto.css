@@ -1,0 +1,61 @@
+.crypto__body {
+  padding: 0rem 1.5rem;
+}
+.crypto__titlebar {
+  background: #f2f2f2;
+  padding: 1.5rem 1rem;
+  box-sizing: border-box;
+  display: flex;
+}
+.crypto__locale {
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.7rem;
+}
+.crypto__titlebar-heading {
+  font-size: 2.2rem;
+  line-height: 2.2rem;
+  font-weight: 500;
+  color: #000;
+}
+.crypto__titlebar-text {
+  font-size: 1.3rem;
+  line-height: 2.2rem;
+  font-weight: 500;
+}
+.crypto__titlebar-dropdown {
+  font-size: 1.6rem;
+}
+.crypto__body-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+.crypto__left {
+  flex: 0.2;
+  background: #f1f1f1;
+}
+.crypto__leftlist {
+  padding: 2rem;
+  overflow-y: scroll;
+  max-height: 60rem;
+}
+
+.crypto__leftlist-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 3.5rem;
+  line-height: 3.5rem;
+  cursor: pointer;
+  border-bottom: 1px solid #ddd;
+  padding: 1rem 0rem;
+}
+.crypto__leftlist-rowitem {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.crypto__right {
+  flex: 0.8;
+}
