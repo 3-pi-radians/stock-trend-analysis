@@ -17,13 +17,21 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background: #f2f2f2;
+  border: 1px solid #ddd;
+  padding: 2rem;
+}
+.markettrend__list-row:hover {
+  background: #ddd;
+  cursor: pointer;
 }
 .markettrend__list-rowtext {
-  font-size: 1.3rem;
-  width: 15rem;
+  font-size: 1.4rem;
+  flex: 0.25;
 }
 .markettrend__list-row > .MuiSvgIcon-root {
-  font-size: 1.6rem;
+  font-size: 2.5rem;
+  font-weight: bold;
 }
 .markettrend__upicon {
   color: #2e7d32;

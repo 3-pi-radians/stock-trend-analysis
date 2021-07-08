@@ -15,7 +15,8 @@ function Chart(props) {
           fill: true,
           borderColor: "#742774",
           pointRadius: 0.8,
-          pointHoverRadius:10
+          pointHoverRadius:10,
+        
       }]
     });
 
@@ -50,7 +51,7 @@ function Chart(props) {
           // in case time-series is changed so applying all the remaining indicators.
           dsets.push({
               label: `${indicators[indLen-1- i].text}-${indicators[indLen-1 - i].period}`,
-              data: calculateMovingAverage(indicators[indLen-1 - i]),
+              data: calculateMovingAverage(indicators[indLen - 1 - i]),
               fill: false,
               borderColor: indicators[indLen - 1 - i].color,
               pointRadius: 0.65,

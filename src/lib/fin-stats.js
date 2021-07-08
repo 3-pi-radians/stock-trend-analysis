@@ -32,7 +32,7 @@ const incomeStatementReports = {
   incomeTaxExpense: "Income Tax Expense",
   ebit: "ebit",
   ebitda: "ebitda",
-  netIncome: "netIncome"
+  netIncome: "Net Income"
 }
 
 const cashFlowReports = {

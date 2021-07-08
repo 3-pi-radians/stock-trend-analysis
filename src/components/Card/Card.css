@@ -7,6 +7,7 @@
   background: #fbfcfc;
   transition: 0.3s all;
   padding: 1rem;
+  text-align: center;
 }
 .card__title {
   font-size: 1.4rem;
@@ -19,6 +20,12 @@
 .card__description {
   font-size: 1rem;
   margin: 8px;
+}
+.card > img {
+  height: 7rem;
+  width: 7rem;
+  object-fit: contain;
+  margin-top: 1rem;
 }
 .card:hover {
   transform: translateY(-0.5rem);

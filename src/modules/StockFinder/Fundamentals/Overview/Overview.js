@@ -227,15 +227,15 @@ function Overview({stock}) {
         </div> 
         <div className = "overview__key-value-text">
         <p className = "overview__value-text">{formatNumber(stock.AnalystTargetPrice, "currency")}</p>
-        <p className = "overview__value-text">{stock.FullTimeEmployees}</p>
-        <p className = "overview__value-text">{stock.DividendDate}</p>
-        <p className = "overview__value-text">{stock.ExDividendDate}</p>
-        <p className = "overview__value-text">{stock.LastSplitFactor}</p>
-        <p className = "overview__value-text">{stock.LastSplitDate}</p>
-        <p className = "overview__value-text">{stock[`52WeekHigh`]}</p>
-        <p className = "overview__value-text">{stock[`52WeekLow`]}</p>
-        <p className = "overview__value-text">{stock[`50DayMovingAverage`]}</p>
-        <p className = "overview__value-text">{stock[`200DayMovingAverage`]}</p>
+        <p className = "overview__value-text">{stock.FullTimeEmployees || "N/A"}</p>
+        <p className = "overview__value-text">{stock.DividendDate || "N/A"}</p>
+        <p className = "overview__value-text">{stock.ExDividendDate || "N/A"}</p>
+        <p className = "overview__value-text">{stock.LastSplitFactor || "N/A"}</p>
+        <p className = "overview__value-text">{stock.LastSplitDate || "N/A"}</p>
+        <p className = "overview__value-text">{stock[`52WeekHigh`] || "N/A"}</p>
+        <p className = "overview__value-text">{stock[`52WeekLow`] || "N/A"}</p>
+        <p className = "overview__value-text">{stock[`50DayMovingAverage`] || "N/A"}</p>
+        <p className = "overview__value-text">{stock[`200DayMovingAverage`] || "N/A"}</p>
         </div>
         </div>
       </div>

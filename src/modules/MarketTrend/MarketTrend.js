@@ -1,71 +1,58 @@
 import React, { useState, useEffect } from 'react';
 import { csv } from 'd3';
-import './MarketTrend.css';
 import TrendingUpIcon from '@material-ui/icons/TrendingUp';
 import TrendingDownIcon from '@material-ui/icons/TrendingDown';
 import TrendingFlatIcon from '@material-ui/icons/TrendingFlat';
 
+import './MarketTrend.css';
 import generalMarketTrend from '../../lib/market-trend';
-
-import d5 from "../../data/5year.csv";
-import d19 from "../../data/2019-2020.csv";
-import d20 from "../../data/2020-2021.csv";
-import d18 from "../../data/2018-2019.csv";
-import d17 from "../../data/2017-2018.csv";
-import d16 from "../../data/2016-2017.csv";
 import nifty from "../../data/nifty_50.csv";
-
 
 const UPTREND = "Uptrend";
 const DOWNTREND = "Downtrend";
 const UPTREND_UNDER_PRESSURE = "Uptrend under Pressure";
 const RALLY_ATTEMPT = "Rally Attempt";
 
-function MarketTrend() {
-  const [data, setData] = useState(null);
-  const [distDays, setDistDays] = useState(0);
-  const [distDates , setDistDates] = useState([]);
+function MarketTrend({marketTrend}) {
+  // const [data, setData] = useState(null);
+  // const [distDates , setDistDates] = useState([]);
 
-  useEffect(() => {
-    csv(nifty).then(response => setData(response));
-  }, []);
+  // useEffect(() => {
+  //   csv(nifty).then(response => setData(response));
+  // });
 
-  useEffect(() => {
-    if (data?.length) {
-      let close = [];
-      let volume = [];
-      let sessions = [];
-      let ddays = 0;
-      let ddates = [];
+  // useEffect(() => {
+  //   if (data?.length) {
+  //     let close = [];
+  //     let volume = [];
+  //     let sessions = [];
+  //     let ddates = [];
 
-      data.forEach(d => {
-        close.push(parseFloat(d.Close));
-        volume.push(parseFloat(d.Volume));
-        sessions.push(d.Date);
-      });
+  //     data.forEach(d => {
+  //       close.push(parseFloat(d.Close));
+  //       volume.push(parseFloat(d.Volume));
+  //       sessions.push(d.Date);
+  //     });
 
-      for (let i = 1; i < close.length; i++) {
-        let prcnt = 100 * (close[i] - close[i-1])/close[i-1];
-        if (prcnt < -0.25 && volume[i] > volume[i-1]) {   
-          ddays++;    
-          ddates.push(sessions[i]);
-        }
-      }
-
-      setDistDays(ddays);
-      setDistDates(ddates);
-    }
-  }, [data]);
+  //     for (let i = 1; i < close.length; i++) {
+  //       let prcnt = 100 * (close[i] - close[i-1])/close[i-1];
+  //       if (prcnt < -0.25 && volume[i] > volume[i-1]) {      
+  //         ddates.push(sessions[i]);
+  //       }
+  //     }
+  //     setDistDates(ddates);
+  //   }
+  // }, [data]);
 
   const showMarketTrend = () => {
-    let marketTrend = generalMarketTrend(distDates, data, 1);
-    marketTrend.reverse();
+    // let marketTrend = generalMarketTrend(distDates, data, 1);
+    // marketTrend.reverse();
     return (
       <div className = "markettrend__list">
         {
           marketTrend?.map((mktrend, id) => {
             return (        
-            <div className = "markettrend__list-row">
+            <div key = {id} className = "markettrend__list-row">
               <p className = "markettrend__list-rowtext">{mktrend.trend} from</p>
               <p className = "markettrend__list-rowtext">{mktrend.startDate}</p>
               <p className = "markettrend__list-rowtext">to</p>
@@ -88,7 +75,7 @@ function MarketTrend() {
         <h2 className = "markettrend__header-text">Market Trend</h2>
       </div>
       <div className = "markettrend__body">
-         {data !== null && showMarketTrend()}
+         {showMarketTrend()}
       </div>
     </div>
   );

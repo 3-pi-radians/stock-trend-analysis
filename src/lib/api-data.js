@@ -38,7 +38,7 @@ const createApiUrl = (params) => {
        
       url +=  `function=${timeSeries}&symbol=${params.symbol}`;
       if (params.locale !== 'US') {
-        url += `.${params.exchange}`
+        url += `.${params.exchange}`;
       } 
       
       if (!extraParams) return url;

@@ -2,14 +2,26 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  box-sizing: border-box;
 }
-.landing__header {
-  height: 4rem;
+.landing__banner {
+  height: 55rem;
+  box-sizing: border-box;
+  z-index: -2;
+  object-fit: contain;
+}
+.landing__banner > img {
   width: 100%;
-  background: #5b2c6f;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  height: 100%;
+  opacity: 0.85;
+}
+.landing__heading {
+  margin-top: 1rem;
+  color: #2874a6;
+  margin-bottom: 2rem;
+  font-size: 10rem;
+  font-weight: 600;
+  text-align: center;
 }
 .landing__header-title {
   font-size: 2.4rem;
@@ -20,9 +32,9 @@
   line-height: 2.8rem;
   letter-spacing: 0.3px;
 }
-.landing__body {
+/* .landing__body {
   padding: 1rem;
-}
+} */
 .landing__card-container {
   display: flex;
   justify-content: space-around;
@@ -32,10 +44,18 @@
   flex-direction: column;
   padding: 1rem;
 }
+.landing__indices-heading {
+  text-align: center;
+  font-size: 1.6rem;
+
+  margin-bottom: 1rem;
+  color: #5b2c6f;
+}
 .landing__indices_list {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  margin-top: 2rem;
 }
 .landing__indices_list-item {
   height: 3rem;

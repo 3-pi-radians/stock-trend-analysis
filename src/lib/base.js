@@ -1,5 +1,4 @@
 export  const TIME_SERIES = "TIME_SERIES";
-export const TECH_INDICATOR = "TECH_INDICATOR";
 export const FUNDAMENTAL_DATA = "FUNDAMENTAL_DATA";
 export const CRYPTO = "CRYPTO";
 

@@ -1,0 +1,63 @@
+.analysis {
+  padding: 2rem;
+}
+.analysis__trend {
+  height: 10rem;
+  width: 50rem;
+  padding: 2rem;
+  display: flex;
+  box-shadow: 0px 3px 6px #00000029;
+  justify-content: space-between;
+  align-items: center;
+}
+.analysis__trend-symbol {
+  height: 8.7rem;
+  width: 8.7rem;
+  position: relative;
+}
+.analysis__trend-symbol > .MuiSvgIcon-root {
+  font-size: 4rem;
+  font-weight: bold;
+  color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.analysis__trend-text {
+  padding: 0.5rem;
+  border: 1px solid #eee;
+}
+.analysis__trend-text > p {
+  font-size: 1.2rem;
+  margin: 1rem;
+}
+.anasysis__trend-text-heading {
+  font-size: 1.8rem;
+  text-align: center;
+  font-weight: 600;
+}
+.analysis__table {
+  box-shadow: 0px 3px 6px #00000029;
+  padding: 2rem;
+}
+.analysis__table-heading {
+  color: #2874a6;
+  font-size: 2.8rem;
+  margin-bottom: 1rem;
+}
+.analysis__table-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.4rem;
+  padding: 1rem;
+}
+.analysis__table-row:hover {
+  background: #eee;
+  cursor: pointer;
+}
+.analysis__table-head {
+  background: #ddd;
+  font-weight: bold;
+}
