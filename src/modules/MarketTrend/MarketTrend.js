@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { csv } from 'd3';
 import TrendingUpIcon from '@material-ui/icons/TrendingUp';
 import TrendingDownIcon from '@material-ui/icons/TrendingDown';
 import TrendingFlatIcon from '@material-ui/icons/TrendingFlat';
@@ -72,8 +71,16 @@ function MarketTrend({marketTrend}) {
   return (
     <div className = "markettrend">
       <div className = "markettrend__header">
-        <h2 className = "markettrend__header-text">Market Trend</h2>
+        <h1 className = "markettrend__header-text">General Market Trend</h1>
+        <div className = "markettrend__desc"> 
+        <p>
+          The General Market Trend shows that how stocks are generally performing during a particular time interval.
+          During this period a Majority of stocks Follow the given trend and investors 
+          can get huge gains or stop crashing loss by following this trend.
+        </p>
+        </div>
       </div>
+      <h2 className = "marketrrend__history">Market Trend History</h2>
       <div className = "markettrend__body">
          {showMarketTrend()}
       </div>

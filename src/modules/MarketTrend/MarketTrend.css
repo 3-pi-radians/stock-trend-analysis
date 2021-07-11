@@ -1,5 +1,30 @@
+.markettrend {
+  padding: 1rem;
+}
+.markettrend__header {
+  padding: 1rem;
+}
 .markettrend__header-text {
   text-align: center;
+  font-size: 3rem;
+  color: #5b2c6f;
+  margin-bottom: 2rem;
+}
+.markettrend__desc {
+  padding: 2rem;
+  box-shadow: 0px 3px 6px #00000029;
+  height: 8rem;
+}
+.markettrend__desc > p {
+  font-size: 1.6rem;
+  color: #2874a6;
+  font-weight: bold;
+}
+.marketrrend__history {
+  font-size: 1.8rem;
+  margin: 1rem;
+  text-align: center;
+  color: #5b2c6f;
 }
 .markettrend__body {
   display: flex;

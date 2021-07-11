@@ -27,6 +27,7 @@ const getBaseURL = () => {
     return `${process.env.REACT_APP_API_BASE_URL_2}`;
   }
 }
+
 const createApiUrl = (params) => {
   let url= `${process.env.REACT_APP_API_BASE_URL_1}`;
 
@@ -64,6 +65,7 @@ const createApiUrl = (params) => {
 const getApiData = async (params) => {
   try {
     let url = createApiUrl(params);
+  
     let response = await axios.get(url);
     let result = response.data;
     console.log(result);

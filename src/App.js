@@ -13,6 +13,7 @@ import Crypto from './modules/Crypto/Crypto';
 import Loader from "./components/Loader/Loader";
 import Analysis from './modules/Analysis/Analysis';
 import generalMarketTrend from './lib/market-trend';
+
 import './App.css';
 
 import nifty from './data/nifty_50.csv';
@@ -22,9 +23,9 @@ function App() {
   const [distDates , setDistDates] = useState([]);
   const [trendArray, setTrendArray] = useState([]);
 
-  useEffect(() => {
+  useEffect(() => { // convert nifty csv data to json format
     csv(nifty).then(response => setData(response)).then(err => console.log(err));
-  }, []);
+  }, []);  
 
   useEffect(() => {
     if (data?.length) {
@@ -34,25 +35,27 @@ function App() {
       let ddates = [];
 
       data.forEach(d => {
-        close.push(parseFloat(d.Close));
-        volume.push(parseFloat(d.Volume));
-        sessions.push(d.Date);
+        close.push(parseFloat(d.Close));  // set the Close array
+        volume.push(parseFloat(d.Volume));   // set the Volume array
+        sessions.push(d.Date);    // set the Date array
       });
 
       for (let i = 1; i < close.length; i++) {
         let prcnt = 100 * (close[i] - close[i-1])/close[i-1];
-        if (prcnt < -0.25 && volume[i] > volume[i-1]) {      
+        if (prcnt < -0.25 && volume[i] > volume[i-1]) {         // finding volume distribution day
           ddates.push(sessions[i]);
         }
       }
-      setDistDates(ddates);
+      setDistDates(ddates); // setting the distDates array with all volume distribution dates from the dataset
     }
   }, [data]);
 
+
+  // Calling generalMarketTrend function to analyse the market trend
   useEffect(() => {
     if (data !== null && distDates.length > 0) {
       let marketTrend = generalMarketTrend(distDates, data, 1);
-      marketTrend.reverse();
+      marketTrend.reverse();  // reversing the returned array to get the most recent trend as 0th element
   
       setTrendArray(marketTrend);
     }
@@ -68,9 +71,11 @@ function App() {
           <Route path = "/stock-finder">
             <StockFinder />
           </Route>
+
           <Route path = "/general-market-trend">
             <MarketTrend marketTrend = {trendArray} />
           </Route>
+          
           <Route path = "/crypto-forex">
             <Crypto />
           </Route>

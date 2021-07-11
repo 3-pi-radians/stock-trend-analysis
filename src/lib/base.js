@@ -2,7 +2,7 @@ export  const TIME_SERIES = "TIME_SERIES";
 export const FUNDAMENTAL_DATA = "FUNDAMENTAL_DATA";
 export const CRYPTO = "CRYPTO";
 
-export const months = ["Jan", "Feb", "Mar", "Apr", "May", "June", "July","Aug", "Sep", "Oct", "Nov", "Dec"];
+export const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul","Aug", "Sep", "Oct", "Nov", "Dec"];
 
 const fundamentals = [
   {

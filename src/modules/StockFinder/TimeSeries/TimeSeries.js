@@ -32,7 +32,7 @@ function TimeSeries({equity, locale, getRequiredStats}) {
         exchange: equity.exchange
       }
 
-      let response = await fetchMarketData(params);
+      let response = await fetchMarketData(params); //  this functions prepare the final URL
       if (!(response instanceof Error)) {      
         let key = Object.keys(response)[1];
         setData(response[key]);

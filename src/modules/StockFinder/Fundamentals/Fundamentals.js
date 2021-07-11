@@ -37,7 +37,7 @@ function Fundamentals({equity}) {
           ...data,
           ...result
         });
-        console.log("data fetched..", result);
+        // console.log("data fetched..", result);
       } 
     }
     if (!data[key]) {

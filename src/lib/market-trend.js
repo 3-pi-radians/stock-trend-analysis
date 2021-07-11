@@ -1,4 +1,4 @@
-// rally attempt, confirmed uptrend, folow-through day.
+// rally attempt, confirmed uptrend, follow-through day.
 
 const UPTREND = "Uptrend";
 const DOWNTREND = "Downtrend";
@@ -224,7 +224,7 @@ const generalMarketTrend = (dates, data, trend = 1) => {
   }
 
   if (trendArr.length) {
-    trendArr[trendArr.length -1].endDate = data[data.length-1].Date;
+    trendArr[trendArr.length -1].endDate = "Present Day";
     trendArr[trendArr.length-1].trendEnd = data[data.length -1].Close;
   }
 

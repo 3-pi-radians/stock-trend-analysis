@@ -101,7 +101,7 @@ function Chart(props) {
         intersect: false
      },
       scales: { 
-        xAxes: [{ display: false, }]
+        xAxes: [{ display: false }]
       }
     };
 

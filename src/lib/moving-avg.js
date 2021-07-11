@@ -9,7 +9,7 @@ class MovingAverages {
       sum += data[i];
     }
     for (let i = days; i < data.length; i++) {
-      result[i-1] = (sum/days).toPrecision(10);
+      result[i] = (sum/days).toPrecision(10);
       sum = sum - data[i-days] + data[i];
     }
 
@@ -29,8 +29,8 @@ class MovingAverages {
 
     sum = sum/days;
     for (let i = days; i < data.length; i++) {
-      result[i-1] = sum.toPrecision(10);
-      sum = data[i] * sFactor + parseFloat(result[i-1]) * (1-sFactor);
+      result[i] = sum.toPrecision(10);
+      sum = data[i] * sFactor + parseFloat(result[i]) * (1-sFactor);
     }
 
     return result;

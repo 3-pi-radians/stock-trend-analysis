@@ -47,7 +47,7 @@ const cardData = [
   }
 ];
 
-const indices = ["Nifty 50", "BSE Sensex", "Dow Jones"];
+const indices = ["Nifty 50", "BSE Sensex"];
 
 function Landing() {
   const history = useHistory();
