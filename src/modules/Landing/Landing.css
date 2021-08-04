@@ -16,20 +16,24 @@
   opacity: 0.85;
 }
 .landing__heading {
-  margin-top: 1rem;
-  color: #2874a6;
+  height: 6rem;
+  background: #000;
+  opacity: 0.7;
+  /* background: #5b2c6f; */
   margin-bottom: 2rem;
-  font-size: 6rem;
-  font-weight: 600;
+
   text-align: center;
+  /* position: fixed;
+  width: 100%;
+  box-sizing: border-box; */
 }
 .landing__header-title {
-  font-size: 2.4rem;
+  font-size: 3rem;
   color: #fff;
   font-family: Roboto;
   font-style: normal;
   font-weight: 500;
-  line-height: 2.8rem;
+  line-height: 6rem;
   letter-spacing: 0.3px;
 }
 /* .landing__body {
@@ -38,6 +42,7 @@
 .landing__card-container {
   display: flex;
   justify-content: space-around;
+  /* margin-top: 8rem; */
 }
 .landing__indices {
   display: flex;

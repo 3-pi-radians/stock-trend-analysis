@@ -9,7 +9,6 @@ import './Landing.css';
 
 import d19 from '../../data/nifty_50.csv';
 import sensex from '../../data/sensex_data.csv';
-import night from '../../assets/STOCKNIGHT.jpeg';
 
 import analysis from '../../assets/analysis.png';
 import stockfinder from '../../assets/stock-finder.png';
@@ -33,8 +32,8 @@ const cardData = [
   },
   {
     title: "Analysis",
-    tagline: "Algorithm Effeciency analysis",
-    description: "know about general market trend.",
+    tagline: "",
+    description: "Do the analysis of various uptrends and downtrends determined by algorithm",
     path: "/analysis",
     image: analysis
   },
@@ -89,16 +88,15 @@ function Landing() {
 
   return (
     <div className = "landing">
-       {/* <div className = "landing__banner">
-         <img src = {night} alt = "background" />
-       </div>
        <div className = "landing__heading">
-         STOCKNIGHT
-       </div> */}
-       <div className = "landing__heading">
-         STOCKNIGHT
+         <div className = "landing__header-title">
+           STOCKNIGHT
+         </div>
        </div>
       <div className = "landing__body">
+        <div className = "landing__card-heading">
+          <p></p>
+        </div>
         <div className = "landing__card-container">
          {
             cardData.map((c, idx) => {
